@@ -114,7 +114,11 @@ sub gen_validator {
     }
 
     $src .= "\n};";
-    say "DEBUG: Validator code:\n<<<$src>>>" if $DEBUG;
+    if ($DEBUG) {
+        require String::LineNumber;
+        say "DEBUG: Validator code:\n" . String::LineNumber::linenum($src);
+    }
+
     my $code = eval $src;
     $@ and die
         "BUG: Can't compile validator code: $@\nValidator code: $code\n";
