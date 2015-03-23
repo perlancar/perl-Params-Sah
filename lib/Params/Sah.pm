@@ -256,6 +256,44 @@ By using the Sah C<default> clause:
 
  gen_validator(['str*', default=>'green']);
 
+=head2 How do I see the validator code being generated?
+
+Set C<$Params::Sah::DEBUG=1> before C<gen_validator()>, for example:
+
+ use Params::Sah qw(gen_validator);
+
+ $Params::Sah::DEBUG = 1;
+ gen_validator('int*', 'str');
+
+Sample output:
+
+   1|sub(\@) {
+   2|    my $_ps_args = shift;
+   3|    my $_ps_res;
+    |
+    |
+   6|    ### validating 0:
+   7|    no warnings 'void';
+   8|    my $_sahv_dpath = [];
+   9|    Carp::croak("arg0: $_ps_res") if !(    # req #0
+  10|    ((defined($_ps_args->[0])) ? 1 : (($_ps_res //= (@$_sahv_dpath ? '@'.join("/",@$_sahv_dpath).": " : "") . "Required but not specified"),0))
+    |
+  12|    &&
+    |
+  14|    # check type 'int'
+  15|    ((Scalar::Util::Numeric::isint($_ps_args->[0])) ? 1 : (($_ps_res //= (@$_sahv_dpath ? '@'.join("/",@$_sahv_dpath).": " : "") . "Not of type integer"),0)));
+    |
+    |
+  18|    ### validating 1:
+  19|    Carp::croak("arg1: $_ps_res") if !(    # skip if undef
+  20|    (!defined($_ps_args->[1]) ? 1 :
+    |
+  22|    (# check type 'str'
+  23|    ((!ref($_ps_args->[1])) ? 1 : (($_ps_res //= (@$_sahv_dpath ? '@'.join("/",@$_sahv_dpath).": " : "") . "Not of type text"),0)))));
+  24|    return;
+    |
+  26|};
+
 
 =head1 SEE ALSO
 
