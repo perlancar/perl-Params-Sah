@@ -1,5 +1,13 @@
 Revision history for Params-Sah
 
+0.02     2015-03-23 (PERLANCAR)
+
+         - No functional changes.
+
+         - Minor bug fix, documentation tweaks, add more tests. Add benchmark
+           against Params::Validate.
+
+
 0.01     2015-03-23 (PERLANCAR)
 
          - First release.
