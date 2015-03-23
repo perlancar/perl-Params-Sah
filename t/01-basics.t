@@ -7,8 +7,37 @@ use warnings;
 use Params::Sah qw(gen_validator);
 use Test::Exception;
 use Test::More 0.98;
+use Test::Warnings qw(warning);
 
-subtest "opt:named=0 (default)" => sub {
+# XXX differentiate carp and warn?
+
+subtest "opt:on_invalid=carp" => sub {
+    my $v = gen_validator({on_invalid=>'carp'}, "str*", "int");
+    isnt(warning { $v->([]) }, '');
+    is  (warning { $v->(["name"]) }, '');
+    is  (warning { $v->(["name", 10]) }, '');
+    isnt(warning { $v->(["name", "x"]) }, '');
+} if 0; # disabled for now, always produces ARRAY(0x....)?
+
+subtest "opt:on_invalid=warn" => sub {
+    my $v = gen_validator({on_invalid=>'warn'}, "str*", "int");
+    isnt(warning { $v->([]) }, '');
+    is  (warning { $v->(["name"]) }, '');
+    is  (warning { $v->(["name", 10]) }, '');
+    isnt(warning { $v->(["name", "x"]) }, '');
+} if 0; # disabled for now, always produces ARRAY(0x....)?
+
+# XXX differentiate croak and die?
+
+subtest "opt:named=0 opt:on_invalid=croak (default)" => sub {
+    my $v = gen_validator("str*", "int");
+    dies_ok  { $v->([]) };
+    lives_ok { $v->(["name"]) };
+    lives_ok { $v->(["name", 10]) };
+    dies_ok  { $v->(["name", "x"]) };
+};
+
+subtest "opt:on_invalid=die" => sub {
     my $v = gen_validator("str*", "int");
     dies_ok  { $v->([]) };
     lives_ok { $v->(["name"]) };

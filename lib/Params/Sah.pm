@@ -117,6 +117,8 @@ sub gen_validator {
         $src .= "    return 1\n";
     } elsif ($opts->{on_invalid} eq 'str') {
         $src .= "    return '';\n";
+    } else {
+        $src .= "    return;\n";
     }
 
     $src .= "\n};";
