@@ -100,6 +100,8 @@ sub gen_validator {
         if ($opts->{on_invalid} =~ /\A(croak|carp|warn|die)\z/) {
             my $stmt = $opts->{on_invalid} =~ /\A(croak|carp)\z/ ?
                 "Carp::$opts->{on_invalid}" : $opts->{on_invalid};
+            $src .= "    undef \$_ps_res;\n" if
+                $i && $opts->{on_invalid} =~ /\A(carp|warn)\z/;
             $src .= "    $stmt(\"$data_name: \$_ps_res\") ".
                 "if !($cd->{result});\n";
         } else {
