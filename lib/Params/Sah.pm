@@ -49,7 +49,13 @@ sub gen_validator {
     my %mentioned_mods;
     my %mentioned_vars;
 
-    $src .= "sub {\n";
+    # currently prototype won't force checking
+    if ($opts->{named}) {
+        $src .= "sub(\\%) {\n";
+    } else {
+        $src .= "sub(\\@) {\n";
+    }
+
     $src .= "    my \$_ps_args = shift;\n";
     $src .= "    my \$_ps_res;\n" unless $opts->{on_invalid} eq 'bool';
 
