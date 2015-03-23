@@ -226,6 +226,19 @@ invalid, or empty string on valid).
 =back
 
 
+=head1 FAQ
+
+=head2 Why does the validator code accept arrayref/hashref instead of array/hash?
+
+To be able to modify the original array/hash, e.g. set default value.
+
+=head2 How to give default value to parameters?
+
+By using the Sah C<default> clause:
+
+ gen_validator(['str*', default=>'green']);
+
+
 =head1 SEE ALSO
 
 L<Sah>, L<Data::Sah>
