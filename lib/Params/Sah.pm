@@ -122,7 +122,7 @@ sub gen_validator {
 }
 
 1;
-# ABSTRACT:
+# ABSTRACT: Validate method/function parameters using Sah schemas
 
 =head1 SYNOPSIS
 
