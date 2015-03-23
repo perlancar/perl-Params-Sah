@@ -258,6 +258,16 @@ By using the Sah C<default> clause:
 
  gen_validator(['str*', default=>'green']);
 
+=head2 Why is my program failing with error message: Can't call method "state" on an undefined value?
+
+You need to use Perl 5.10 or newer and enable the 5.10 feature 'state':
+
+ use 5.010;
+
+or:
+
+ use feature 'state';
+
 =head2 How do I see the validator code being generated?
 
 Set C<$Params::Sah::DEBUG=1> before C<gen_validator()>, for example:
