@@ -180,8 +180,9 @@ done for performance reason. For efficiency, you need to cache this validator
 code instead of producing them at each function call, thus the use of C<state>
 variables.
 
-Performance is on par with Params::Validate. Sah provides a rich way to validate
-data structures.
+Performance is on par with or faster than Params::Validate, since you can avoid
+recompiling specification or copying array/hash twice. Sah also provides a rich
+way to validate data structures.
 
 
 =head1 FUNCTIONS
