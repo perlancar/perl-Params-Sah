@@ -54,5 +54,3 @@ cmpthese(0, {
         });
     },
 });
-
-# XXX test positional
