@@ -180,9 +180,9 @@ done for performance reason. For efficiency, you need to cache this validator
 code instead of producing them at each function call, thus the use of C<state>
 variables.
 
-Performance is on par with or faster than Params::Validate, since you can avoid
-recompiling specification or copying array/hash twice. Sah also provides a rich
-way to validate data structures.
+Performance is faster than Params::Validate, since you can avoid recompiling
+specification or copying array/hash twice. Sah also provides a rich way to
+validate data structures.
 
 
 =head1 FUNCTIONS
@@ -225,6 +225,23 @@ perspective. Other valid choices include: C<warn>, C<carp>, C<die>, C<bool>
 invalid, or empty string on valid).
 
 =back
+
+
+=head1 PERFORMANCE NOTES
+
+Sample benchmark against Params::Validate:
+
+#EXAMPLE: devscripts/bench
+
+Sample benchmark result on my laptop:
+
+                                   Rate P::V, named, str+int P::V, pos, str+int P::V, pos, str P::Sah, named, str+int P::Sah, pos, str+int P::Sah, pos, str
+ P::V, named, str+int    77993.2+-0.14/s                   --             -28.3%         -72.3%                 -83.0%               -90.7%           -92.9%
+ P::V, pos, str+int        108710+-140/s         39.38+-0.18%                 --         -61.4%                 -76.3%               -87.0%           -90.1%
+ P::V, pos, str            281590+-530/s        261.04+-0.68%      159.03+-0.59%             --                 -38.6%               -66.4%           -74.4%
+ P::Sah, named, str+int    458440+-180/s               487.8%      321.71+-0.57%   62.81+-0.31%                     --               -45.2%           -58.3%
+ P::Sah, pos, str+int      837250+-880/s          973.5+-1.1%        670.2+-1.3%  197.33+-0.64%            82.63+-0.2%                   --           -23.9%
+ P::Sah, pos, str       1.0997e+06+-24/s              1310.0%        911.6+-1.3%  290.54+-0.73%                 139.9%         31.35+-0.14%               --
 
 
 =head1 FAQ
