@@ -1,0 +1,33 @@
+#!/usr/bin/env perl
+
+use 5.010;
+use strict;
+use warnings;
+
+use Benchmark::Dumb qw(cmpthese);
+use Params::Sah qw(gen_validator);
+use Params::Validate qw(validate);
+
+my @data = (name=>"ujang", age=>30);
+
+# XXX not yet working
+
+cmpthese(0, {
+    'Params::Sah     , named' => sub {
+        state $validator = gen_validator(
+            {named=>1},
+            name => 'str*',
+            age  => 'int',
+        );
+        $validator->({@data});
+    },
+    'Params::Validate, named' => sub {
+        validate(@data, {
+            name => {type=>'SCALAR'},
+            age  => {type=>'SCALAR', regex=>qr/\A\d+\z/, optional=>1},
+        });
+    },
+});
+
+# XXX test positional
+

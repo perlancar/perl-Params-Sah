@@ -107,6 +107,12 @@ sub gen_validator {
         $i++;
     } # for $argname
 
+    if ($opts->{on_invalid} eq 'bool') {
+        $src .= "    return 1\n";
+    } elsif ($opts->{on_invalid} eq 'str') {
+        $src .= "    return '';\n";
+    }
+
     $src .= "\n};";
     say "DEBUG: Validator code:\n<<<$src>>>" if $DEBUG;
     my $code = eval $src;
