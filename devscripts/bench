@@ -6,7 +6,7 @@ use warnings;
 
 use Benchmark::Dumb qw(cmpthese);
 use Params::Sah qw(gen_validator);
-use Params::Validate qw(validate);
+use Params::Validate qw(:all);
 
 my @data = (name=>"ujang", age=>30);
 
@@ -23,11 +23,10 @@ cmpthese(0, {
     },
     'Params::Validate, named' => sub {
         validate(@data, {
-            name => {type=>'SCALAR'},
-            age  => {type=>'SCALAR', regex=>qr/\A\d+\z/, optional=>1},
+            name => {type=>SCALAR},
+            age  => {type=>SCALAR, regex=>qr/\A\d+\z/, optional=>1},
         });
     },
 });
 
 # XXX test positional
-
