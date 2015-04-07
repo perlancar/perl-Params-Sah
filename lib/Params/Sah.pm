@@ -195,7 +195,7 @@ None exported by default, but exportable.
 
 Generate code for subroutine validation. It accepts an optional hashref as the
 first argument for options. The rest of the arguments are Sah schemas that
-corresponds to the function parameter in the same position, i.e. the first
+correspond to the function parameters in the same position, i.e. the first
 schema will validate the function's first argument, and so on. Example:
 
  gen_validator('schema1', 'schema2', ...);
