@@ -1,5 +1,12 @@
 Revision history for Params-Sah
 
+0.04     2015-04-22 (PERLANCAR)
+
+         - No functional changes.
+
+         - Tweak documentation: fix typos, add FAQ entry.
+
+
 0.03     2015-03-23 (PERLANCAR)
 
          - [Bugfix] When on_invalid=warn|carp, reset $_ps_res for next argument.
