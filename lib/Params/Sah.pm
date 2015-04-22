@@ -248,6 +248,12 @@ Sample benchmark result on my laptop:
 
 =head1 FAQ
 
+=head2 How do I learn more about Sah (the schema language)?
+
+See the specification: L<Sah>. The L<Sah::Examples> distribution also contains
+more examples. Also, for other examples, lots of my distributions contain
+L<Rinci> metadata which includes schemas for each function arguments.
+
 =head2 Why does the validator code accept arrayref/hashref instead of array/hash?
 
 To be able to modify the original array/hash, e.g. set default value.
