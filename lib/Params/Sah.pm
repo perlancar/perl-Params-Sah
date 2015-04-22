@@ -201,7 +201,7 @@ schema will validate the function's first argument, and so on. Example:
  gen_validator('schema1', 'schema2', ...);
  gen_validator({option=>'val', ...}, 'schema1', 'schema2', ...);
 
-Will return a coderef which is the validator code. The code accepts a hashref
+Will return a coderef which is the validator code. The code accepts an arrayref
 (usually C<< \@_ >>).
 
 Known options:
