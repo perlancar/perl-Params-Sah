@@ -321,4 +321,7 @@ L<Params::Validate>
 
 L<Perinci::Sub::Wrapper>, if you want to do more than parameter validation.
 
+L<Perinci::Sub::ValidateArgs> and L<Data::Sah::Params>, an accidental
+reimplementation of the same idea a year later :-)
+
 =cut
