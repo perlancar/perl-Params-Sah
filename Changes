@@ -1,5 +1,15 @@
 Revision history for Params-Sah
 
+0.05    2016-06-02 (PERLANCAR)
+
+	- No functional changes.
+
+	- Update to Data::Sah 0.79 (introduced v to compilation data,
+	  modules becomes array of records).
+
+	- [doc] Mention Perinci::Sub::ValidateArgs and Data::Sah::Params.
+
+
 0.04     2015-04-22 (PERLANCAR)
 
          - No functional changes.
