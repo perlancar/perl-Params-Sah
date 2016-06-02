@@ -46,7 +46,7 @@ sub gen_validator {
     my $src = '';
 
     my $i = 0;
-    my %mentioned_mods;
+    my @modules_for_all_args;
     my %mentioned_vars;
 
     # currently prototype won't force checking
@@ -78,18 +78,13 @@ sub gen_validator {
             return_type  => $return_type,
             indent_level => 1,
         );
-        for my $mod (sort keys %{ $cd->{module_statements} }) {
-            next if $mentioned_mods{$mod}++;
-            my $stmt = $cd->{module_statements}{$mod};
-            $src .= "    $stmt->[0] $mod".
-                ($stmt->[1] && @{ $stmt->[1] } ?
-                     " ".join(", ", @{ $stmt->[1] }) : "").";\n";
-        }
-        for my $mod (@{ $cd->{modules} }) {
-            next if $cd->{module_statements}{$mod};
-            (my $mod_pm = $mod) =~ s!::!/!g; $mod_pm .= ".pm";
-            next if $mentioned_mods{$mod}++;
-            require $mod_pm;
+        die "Incompatible Data::Sah version (cd v=$cd->{v}, expected 2)" unless $cd->{v} == 2;
+        for my $mod_rec (@{ $cd->{modules} }) {
+            next unless $mod_rec->{phase} eq 'runtime';
+            next if grep { ($mod_rec->{use_statement} && $_->{use_statement} && $_->{use_statement} eq $mod_rec->{use_statement}) ||
+                               $_->{name} eq $mod_rec->{name} } @modules_for_all_args;
+            push @modules_for_all_args, $mod_rec;
+            $src .= "    ".($mod_rec->{use_statement} // "require $mod_rec->{name}").";\n";
         }
         for my $var (sort keys %{$cd->{vars}}) {
             next if $mentioned_vars{$var}++;
