@@ -1,5 +1,12 @@
 Revision history for Params-Sah
 
+0.06    2016-06-05 (PERLANCAR)
+
+	- No functional changes.
+
+	- Bump prereq version Data::Sah from 0.79 -> 0.82 [CT].
+
+
 0.05    2016-06-02 (PERLANCAR)
 
 	- No functional changes.
