@@ -1,3 +1,18 @@
+0.070   2020-05-08  Released-By: PERLANCAR; Urgency: medium
+
+        - The validator now forbids extraneous arguments by default, unless
+          option allow_extra=>1 is given.
+
+        - The validator now checks required arguments (e.g. it now dies when 3
+	  parameters are specified but only 2 are given). Optional parameters
+	  can be specified using the 'optional_params' option.
+
+        - Allow disabling validation via option disable=>1 (or $OPT_DISABLE=1).
+
+        - Observe package variables: $OPT_DISABLE, $OPT_ALLOW_EXTRA,
+	  $OPT_ON_INVALID, $OPT_NAMED.
+
+
 0.06    2016-06-05  Released-By: PERLANCAR
 
 	- No functional changes.
